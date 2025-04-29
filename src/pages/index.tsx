@@ -13,23 +13,23 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
+    price: string;
   }[]
 }
 
-
 export default function Home({ products }: HomeProps) {
-  const [sliderRef] = useKeenSlider({
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: 3,
       spacing: 48
     }
   })
+
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products?.map(product => {
         return (
-          <Link key={product.id} href={`/product/${product.id}`}>
+          <Link key={product.id} href={`/product/${product.id}`} legacyBehavior prefetch={false}>
             <Product
               as="a"
               className="keen-slider__slide">
